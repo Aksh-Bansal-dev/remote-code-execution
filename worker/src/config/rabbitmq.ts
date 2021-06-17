@@ -15,7 +15,7 @@ connection.on("disconnect", function (err) {
 const onMessage = (data: any) => {
   let message = JSON.parse(data.content.toString());
   console.log(message);
-  codeRunner(message);
+  codeRunner(message, channelWrapper, data);
 };
 
 // Set up a channel listening for messages in the queue.

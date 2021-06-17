@@ -25,12 +25,11 @@ router.get("/results/:id", async (req: Request, res: Response) => {
       res.status(202).send({ status: "Running" });
     } else {
       const result = JSON.parse(status);
-      if (!result.result.data) {
+      if (result.result.data.length === 0) {
         res.send("Compilation Error");
         return;
       }
       const output = Buffer.from(result.result.data).toString();
-      console.log(output);
       let outputString = "";
       for (let i = 0; i < output.length; ++i) {
         if (output.charAt(i) == "\n") {

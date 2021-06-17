@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Remote Code Execution</title>
+  </head>
+  <body>
+    <form autocomplete="off" method="POST" action="upload" enctype="multipart/form-data">
+      <div>
+        <select id="lang" name="lang">
+          <option value="c++">C++</option>
+          <option value="java">Java</option>
+          <option value="python">Python 3</option>
+        </select>
+      </div>
+      <div>
+        <span>Source code: </span>
+        <input id="code" type="file" name="sourcecode" />
+      </div>
+      <div>
+        <span>Input file: </span>
+        <input id="input" name="input" type="file" />
+      </div>
+      <div><button type="submit" id="submit">Submit</button></div>
+    </form>
+    <script src="js/app.js">
+    </script>
+  <body>
+</html>

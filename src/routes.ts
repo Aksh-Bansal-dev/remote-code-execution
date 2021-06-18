@@ -25,10 +25,6 @@ router.get("/results/:id", async (req: Request, res: Response) => {
       res.status(202).send({ status: "Running" });
     } else {
       const result = JSON.parse(status);
-      if (result.result.data.length === 0) {
-        res.send("Compilation Error");
-        return;
-      }
       const output = Buffer.from(result.result.data).toString();
       let outputString = "";
       for (let i = 0; i < output.length; ++i) {
@@ -37,6 +33,10 @@ router.get("/results/:id", async (req: Request, res: Response) => {
         } else {
           outputString += output.charAt(i);
         }
+      }
+      if (result.result.data.length === 0 || output.trim().length === 0) {
+        res.send("Compilation Error");
+        return;
       }
 
       res.status(200).send("Result: <br/>" + outputString);

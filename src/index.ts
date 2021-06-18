@@ -21,7 +21,7 @@ app.post("/upload", isValid, async (req: Request, res: Response) => {
   try {
     // @ts-ignore
     const dirId = uuid();
-    const path = `${process.cwd()}/temp/${dirId}`;
+    const location = path.join(process.cwd(), "temp", dirId);
 
     const data = {
       // @ts-ignore
@@ -31,11 +31,11 @@ app.post("/upload", isValid, async (req: Request, res: Response) => {
       timeout: 5000,
     };
 
-    fs.mkdir(path, () => console.log("folder created"));
-    if (!fs.existsSync(path)) {
+    fs.mkdir(location, () => console.log("folder created"));
+    if (!fs.existsSync(location)) {
       setTimeout(async () => {
         fs.writeFile(
-          `${path}/input.txt`,
+          path.join(location, "input.txt"),
           // @ts-ignore
           req.files!.input.data,
           (err) => {
@@ -48,7 +48,7 @@ app.post("/upload", isValid, async (req: Request, res: Response) => {
         );
         fs.writeFile(
           // @ts-ignore
-          `${path}/${req.files!.sourcecode.name}`,
+          path.join(location, req.files!.sourcecode.name),
           // @ts-ignore
           req.files!.sourcecode.data,
           (err) => {
@@ -64,7 +64,7 @@ app.post("/upload", isValid, async (req: Request, res: Response) => {
       }, 5000);
     } else {
       fs.writeFile(
-        `${path}/input.txt`,
+        path.join(location, "input.txt"),
         // @ts-ignore
         req.files!.input.data,
         (err) => {
@@ -77,7 +77,7 @@ app.post("/upload", isValid, async (req: Request, res: Response) => {
       );
       fs.writeFile(
         // @ts-ignore
-        `${path}/${req.files!.sourcecode.name}`,
+        path.join(location, req.files!.sourcecode.name),
         // @ts-ignore
         req.files!.sourcecode.data,
         (err) => {
